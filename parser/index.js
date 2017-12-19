@@ -75,7 +75,7 @@ function processData(data) {
                 priority: node.priority,
                 type: YEAR_TYPE,
                 title: node.title,
-                y: 500,
+                y: 100,
                 x: Number(lastX.YEAR_TYPE),
             };
         }
@@ -92,14 +92,14 @@ function processData(data) {
             };
         }
         if (node.id < TYPES_BORDERS.COURSE) {
-            lastX.COURSE_TYPE += 1000;
+            lastX.COURSE_TYPE += 1200;
             return {
                 id: Number(node.id),
                 parentId: Number(node.parentId),
                 priority: node.priority,
                 type: COURSE_TYPE,
                 title: node.title,
-                y: 1500,
+                y: 2000,
                 x: Number(lastX.COURSE_TYPE),
                 prevId: Number(node['prevId\r']) || 0,
             };
@@ -112,7 +112,7 @@ function processData(data) {
                 priority: node.priority,
                 type: THEME_TYPE,
                 title: node['title\r'],
-                y: 2000,
+                y: 3000,
                 x: Number(lastX.THEME_TYPE),
             };
         }
@@ -136,13 +136,6 @@ function processData(data) {
                 type: EMPTY_EDGE_TYPE,
             });
         }
-    });
-    nodes.push({
-        "id": 0,
-        "title": "Node A",
-        "x": 258.3976135253906,
-        "y": 331.9783248901367,
-        "type": COURSE_TYPE
     });
     graph.nodes = graph.nodes.concat(nodes);
     graph.edges = graph.edges.concat(edges);

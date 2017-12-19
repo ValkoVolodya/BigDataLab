@@ -6,7 +6,7 @@ import GraphView from 'react-digraph';
 import GraphConfig from './graph-config.js'; // Configures node/edge types
 
 import { AddNodeForm } from '../AddNodeForm';
-import { Alert } from 'antd';
+import { Alert, Card } from 'antd';
 
 const styles = {  
   graph: {
@@ -54,7 +54,7 @@ class Graph extends Component {
   }
 
   componentDidMount() {
-    fetch('/graph.json')
+    fetch('graph.json')
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
@@ -287,44 +287,52 @@ class Graph extends Component {
           onCreate={this.handleCreate}
           types={NODE_TYPES}
         />
-      
-        <GraphView  ref={(el) => this.GraphView = el}
-                    nodeKey={NODE_KEY}
-                    emptyType={EMPTY_TYPE}
-                    nodes={nodes}
-                    edges={edges}
-                    selected={selected}
-                    nodeTypes={NodeTypes}
-                    nodeSubtypes={NodeSubtypes}
-                    edgeTypes={EdgeTypes}
-                    getViewNode={this.getViewNode}
-                    onSelectNode={this.onSelectNode}
-                    onCreateNode={this.onCreateNode}
-                    onUpdateNode={this.onUpdateNode}
-                    onDeleteNode={this.onDeleteNode}
-                    onSelectEdge={this.onSelectEdge}
-                    onCreateEdge={this.onCreateEdge}
-                    onSwapEdge={this.onSwapEdge}
-                    onDeleteEdge={this.onDeleteEdge}/>
+
+        <Card
+          title="Інструкції"
+          bordered={false}
+          style={{
+            width: 300,
+            position: 'fixed',
+            margin: '20px',
+          }}
+        >
+          <p>
+            Для додавання вершини натисніть Shift+ЛКМ
+          </p>
+          <p>
+            Щоб додати зв'язок проведіть мишею між потрібними вершинами
+          </p>
+          <p>
+            Використовуйте скрол для збільшення/зменшення робочого простору
+          </p>
+        </Card>
+
+        <GraphView 
+          ref={(el) => this.GraphView = el}
+          nodeKey={NODE_KEY}
+          emptyType={EMPTY_TYPE}
+          nodes={nodes}
+          edges={edges}
+          selected={selected}
+          nodeTypes={NodeTypes}
+          nodeSubtypes={NodeSubtypes}
+          edgeTypes={EdgeTypes}
+          getViewNode={this.getViewNode}
+          onSelectNode={this.onSelectNode}
+          onCreateNode={this.onCreateNode}
+          onUpdateNode={this.onUpdateNode}
+          onDeleteNode={this.onDeleteNode}
+          onSelectEdge={this.onSelectEdge}
+          onCreateEdge={this.onCreateEdge}
+          onSwapEdge={this.onSwapEdge}
+          onDeleteEdge={this.onDeleteEdge}
+          minZoom={0.02}
+          maxZoom={2}
+        />
       </div>
     );
   }
 }
-// old implementation without basic data
-// const ALL_NODES_QUERY = gql`
-//   query AllNodesQuery {
-//     allNodes {
-//       id
-//       title
-//       x
-//       y
-//       type
-//     }
-//   }
-// `
 
-// export default graphql(
-//   ALL_NODES_QUERY,
-//   { name: 'allNodesQuery' }
-// )(Graph);
 export default Graph;
