@@ -54,6 +54,3 @@ pids
 *.pid
 *.seed
 *.pid.lock
-
-# bundle
-dist/
